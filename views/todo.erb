@@ -13,8 +13,32 @@
 <ul>
 
 <% all_tasks.each do |task|%>
-<li><%= task %></li>
+
+<% if task["completed"] %>
+<li style="text-decoration: line-through;">
+
+<% else %>
+<li>
+
 <% end %>
+
+
+<%= task["content"] %>
+	
+
+	<% unless task["completed"] %>
+
+<form action="/mark_complete" method="POST">
+<input type="submit" name="complete" value="Mark complete" / >
+<input type="hidden" name="content" value="<%= task["content"] %>">
+</form>
+
+<% end %>
+
+
+</li>
+<% end %>
+
 
 </ul>
 
